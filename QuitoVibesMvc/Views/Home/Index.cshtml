@@ -1,0 +1,71 @@
+@{
+    ViewData["Title"] = "Inicio - Municipio de Quito";
+}
+
+<!-- Hero Section -->
+<div class="hero-municipio text-center py-5 mb-5 shadow-lg">
+    <div class="container py-3">
+        <span class="badge bg-danger text-uppercase px-3 py-2 fs-6 mb-3">Portal Oficial de la Capital</span>
+        <h1 class="display-4 fw-bold mb-3">Quito Vibes & Culture</h1>
+        <p class="lead text-light opacity-90 mx-auto mb-4" style="max-width: 750px;">
+            Plataforma MVC del Distrito Metropolitano de Quito para la gestión, promoción y administración segura de la agenda de eventos culturales.
+        </p>
+
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <a asp-controller="Eventos" asp-action="Index" class="btn btn-danger btn-lg px-4 py-3 fw-bold shadow">
+                <i class="bi bi-shield-lock-fill me-2"></i> Acceder al Gestor CRUD (Protegido)
+            </a>
+            @if (!(User.Identity?.IsAuthenticated ?? false))
+            {
+                <a asp-controller="Account" asp-action="Login" class="btn btn-outline-light btn-lg px-4 py-3 fw-semibold">
+                    <i class="bi bi-box-arrow-in-right me-2"></i> Iniciar Sesión (Login MD5)
+                </a>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Tarjetas de Características y Requerimientos de la Materia -->
+<div class="row g-4 mb-5">
+    <div class="col-md-4">
+        <div class="card card-quito h-100 p-3 text-center">
+            <div class="card-body">
+                <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                    <i class="bi bi-diagram-3-fill fs-3"></i>
+                </div>
+                <h5 class="fw-bold text-dark mb-2">Patrón MVC y CRUD Completo</h5>
+                <p class="text-secondary small">
+                    Estructurado en Controladores, Vistas y Modelos con EF Core. Permite Crear, Leer, Editar y Eliminar eventos culturales de la ciudad.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card card-quito h-100 p-3 text-center" style="border-top: 4px solid var(--quito-red);">
+            <div class="card-body">
+                <div class="bg-danger text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                    <i class="bi bi-key-fill fs-3"></i>
+                </div>
+                <h5 class="fw-bold text-dark mb-2">Autenticación & Hash MD5</h5>
+                <p class="text-secondary small">
+                    Sistema de Login integrado con contraseñas encriptadas mediante <strong>MD5 / SHA-256</strong>. Protección de rutas con cookies de sesión.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card card-quito h-100 p-3 text-center">
+            <div class="card-body">
+                <div class="bg-dark text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                    <i class="bi bi-shield-check fs-3"></i>
+                </div>
+                <h5 class="fw-bold text-dark mb-2">Protección de URLs</h5>
+                <p class="text-secondary small">
+                    Las URLs privadas (ej: <code>/Eventos</code>) redirigen de forma estricta a la pantalla de inicio de sesión si no existe autenticación previa.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

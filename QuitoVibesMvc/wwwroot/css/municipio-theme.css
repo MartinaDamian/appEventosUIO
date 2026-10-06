@@ -1,0 +1,258 @@
+/* ==========================================================================
+   ESTILO INSTITUCIONAL: MUNICIPIO DE QUITO - QUITO VIBES
+   Colores Principales:
+   - Azul Noche / Institucional: #002B49
+   - Rojo Alcaldía / Municipio:  #D3122A
+   - Azul Plomo Bajo (Slate):    #334155 / #475569
+   - Gris Plomo Claro Background:#F1F5F9 / #F8FAFC
+   ========================================================================== */
+
+:root {
+    --quito-blue: #002B49;
+    --quito-blue-hover: #001A2C;
+    --quito-red: #D3122A;
+    --quito-red-hover: #AA0E21;
+    --quito-plomo: #334155;
+    --quito-plomo-light: #475569;
+    --quito-plomo-bg: #F8FAFC;
+    --quito-border: #E2E8F0;
+    --quito-shadow: 0 10px 25px -5px rgba(0, 43, 73, 0.1), 0 8px 10px -6px rgba(0, 43, 73, 0.05);
+}
+
+body {
+    background-color: var(--quito-plomo-bg);
+    color: #1E293B;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Franja Tricolor Superior del Municipio --- */
+.quito-top-bar {
+    height: 5px;
+    background: linear-gradient(90deg, var(--quito-blue) 0%, var(--quito-blue) 40%, var(--quito-red) 40%, var(--quito-red) 60%, var(--quito-blue) 60%, var(--quito-blue) 100%);
+    width: 100%;
+}
+
+/* --- Navigation / Header --- */
+.navbar-quito {
+    background-color: var(--quito-blue) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 0.8rem 1.5rem;
+}
+
+.navbar-quito .navbar-brand {
+    color: #FFFFFF !important;
+    font-weight: 700;
+    font-size: 1.35rem;
+    letter-spacing: -0.3px;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.navbar-quito .navbar-brand span.accent {
+    color: var(--quito-red);
+    background: #FFFFFF;
+    padding: 0.1rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.navbar-quito .nav-link {
+    color: #E2E8F0 !important;
+    font-weight: 500;
+    padding: 0.5rem 1rem !important;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.navbar-quito .nav-link:hover, 
+.navbar-quito .nav-link.active {
+    color: #FFFFFF !important;
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+/* --- Municipal Badges & Hero --- */
+.hero-municipio {
+    background: linear-gradient(135deg, var(--quito-blue) 0%, var(--quito-plomo) 100%);
+    color: #FFFFFF;
+    padding: 3rem 2rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--quito-shadow);
+}
+
+.hero-municipio::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(211, 18, 42, 0.25) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.badge-quito-red {
+    background-color: var(--quito-red);
+    color: #FFFFFF;
+    font-weight: 600;
+}
+
+.badge-quito-blue {
+    background-color: var(--quito-blue);
+    color: #FFFFFF;
+    font-weight: 600;
+}
+
+.badge-quito-plomo {
+    background-color: var(--quito-plomo);
+    color: #FFFFFF;
+    font-weight: 600;
+}
+
+/* --- Card Styles --- */
+.card-quito {
+    border: 1px solid var(--quito-border);
+    border-radius: 12px;
+    background: #FFFFFF;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-quito:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--quito-shadow);
+}
+
+.card-quito-header {
+    background-color: var(--quito-blue);
+    color: #FFFFFF;
+    border-top-left-radius: 11px;
+    border-top-right-radius: 11px;
+    padding: 1rem 1.25rem;
+    font-weight: 700;
+}
+
+.card-login {
+    max-width: 440px;
+    margin: 3rem auto;
+    border-top: 4px solid var(--quito-red);
+}
+
+/* --- Buttons --- */
+.btn-quito-primary {
+    background-color: var(--quito-blue);
+    color: #FFFFFF;
+    border: none;
+    font-weight: 600;
+    padding: 0.6rem 1.4rem;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-quito-primary:hover {
+    background-color: var(--quito-blue-hover);
+    color: #FFFFFF;
+}
+
+.btn-quito-danger {
+    background-color: var(--quito-red);
+    color: #FFFFFF;
+    border: none;
+    font-weight: 600;
+    padding: 0.6rem 1.4rem;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-quito-danger:hover {
+    background-color: var(--quito-red-hover);
+    color: #FFFFFF;
+}
+
+.btn-quito-secondary {
+    background-color: var(--quito-plomo);
+    color: #FFFFFF;
+    border: none;
+    font-weight: 600;
+    padding: 0.6rem 1.4rem;
+    border-radius: 8px;
+}
+
+.btn-quito-secondary:hover {
+    background-color: #1E293B;
+    color: #FFFFFF;
+}
+
+/* --- Table Styling --- */
+.table-quito {
+    background: #FFFFFF;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.table-quito thead {
+    background-color: var(--quito-blue);
+    color: #FFFFFF;
+}
+
+.table-quito th {
+    padding: 1rem;
+    font-weight: 600;
+    border: none;
+}
+
+.table-quito td {
+    padding: 0.9rem 1rem;
+    vertical-align: middle;
+    border-bottom: 1px solid var(--quito-border);
+}
+
+/* --- Form Controls --- */
+.form-control-quito {
+    border: 1px solid var(--quito-border);
+    border-radius: 8px;
+    padding: 0.65rem 1rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-control-quito:focus {
+    border-color: var(--quito-blue);
+    box-shadow: 0 0 0 3px rgba(0, 43, 73, 0.15);
+}
+
+/* --- Footer --- */
+.footer-quito {
+    background-color: var(--quito-blue);
+    color: #94A3B8;
+    margin-top: auto;
+    padding: 2rem 0 1.5rem 0;
+    border-top: 3px solid var(--quito-red);
+}
+
+.footer-quito a {
+    color: #CBD5E1;
+    text-decoration: none;
+}
+
+.footer-quito a:hover {
+    color: #FFFFFF;
+    text-decoration: underline;
+}
+
+/* Security Banner Alert */
+.alert-security {
+    background-color: #FEF2F2;
+    border-left: 4px solid var(--quito-red);
+    color: #991B1B;
+    padding: 1rem;
+    border-radius: 6px;
+}

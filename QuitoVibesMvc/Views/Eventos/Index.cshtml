@@ -1,0 +1,150 @@
+@model IEnumerable<QuitoVibesMvc.Models.EventoCultural>
+
+@{
+    ViewData["Title"] = "Gestor CRUD de Eventos Culturales";
+}
+
+<!-- Hero Banner Institucional -->
+<div class="hero-municipio d-flex justify-content-between align-items-center flex-wrap gap-3">
+    <div>
+        <div class="d-flex align-items-center gap-2 mb-2">
+            <span class="badge bg-danger">SECCIÓN PROTEGIDA [AUTHORIZE]</span>
+            <span class="badge bg-light text-dark"><i class="bi bi-shield-check text-success me-1"></i> Sesión Autenticada</span>
+        </div>
+        <h2 class="fw-bold mb-1"><i class="bi bi-calendar-week me-2"></i>Agenda Cultural de Quito - Gestor CRUD</h2>
+        <p class="mb-0 text-light opacity-90">
+            Administración completa (Crear, Leer, Editar, Eliminar) de los eventos y actividades culturales del Distrito Metropolitano.
+        </p>
+    </div>
+    <div>
+        <a asp-action="Create" class="btn btn-danger btn-lg shadow fw-bold">
+            <i class="bi bi-plus-circle-fill me-2"></i>+ Crear Nuevo Evento
+        </a>
+    </div>
+</div>
+
+<!-- Filtros y Búsqueda -->
+<div class="card card-quito mb-4 shadow-sm">
+    <div class="card-body">
+        <form method="get" asp-action="Index" class="row g-3 align-items-center">
+            <div class="col-md-5">
+                <div class="input-group">
+                    <span class="input-group-text bg-white border-end-0"><i class="bi bi-search text-secondary"></i></span>
+                    <input type="text" name="search" value="@ViewData["CurrentSearch"]" class="form-control form-control-quito border-start-0" placeholder="Buscar por título o descripción..." />
+                </div>
+            </div>
+            <div class="col-md-3">
+                <select name="categoria" class="form-select form-control-quito">
+                    <option value="">-- Todas las Categorías --</option>
+                    <option value="Fiestas de Quito" selected="@(ViewData["CurrentCategoria"]?.ToString() == "Fiestas de Quito")">Fiestas de Quito</option>
+                    <option value="Concierto" selected="@(ViewData["CurrentCategoria"]?.ToString() == "Concierto")">Concierto</option>
+                    <option value="Teatro" selected="@(ViewData["CurrentCategoria"]?.ToString() == "Teatro")">Teatro</option>
+                    <option value="Exposición" selected="@(ViewData["CurrentCategoria"]?.ToString() == "Exposición")">Exposición</option>
+                    <option value="Gastronomía" selected="@(ViewData["CurrentCategoria"]?.ToString() == "Gastronomía")">Gastronomía</option>
+                </select>
+            </div>
+            <div class="col-md-4 d-flex gap-2">
+                <button type="submit" class="btn btn-quito-primary flex-grow-1">
+                    <i class="bi bi-filter me-1"></i> Filtrar
+                </button>
+                <a asp-action="Index" class="btn btn-outline-secondary">
+                    <i class="bi bi-arrow-counterclockwise"></i> Limpiar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Tabla CRUD de Eventos -->
+<div class="card card-quito shadow-sm overflow-hidden">
+    <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
+        <h5 class="fw-bold mb-0 text-dark">
+            <i class="bi bi-list-stars me-2 text-primary"></i>Listado de Eventos Registrados (@Model.Count())
+        </h5>
+        <span class="small text-muted">Mostrando registros activos en la base de datos SQL</span>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-quito align-middle mb-0">
+            <thead>
+                <tr>
+                    <th>Evento</th>
+                    <th>Lugar / Sector</th>
+                    <th>Fecha & Hora</th>
+                    <th>Categoría</th>
+                    <th>Precio</th>
+                    <th class="text-end px-4">Acciones (CRUD)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (!Model.Any())
+                {
+                    <tr>
+                        <td colspan="6" class="text-center py-5 text-muted">
+                            <i class="bi bi-calendar-x display-4 d-block text-secondary mb-2"></i>
+                            No se encontraron eventos culturales con los criterios seleccionados.
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center gap-3">
+                                    <img src="@item.ImagenUrl" alt="@item.Titulo" class="rounded border shadow-sm" style="width: 50px; height: 50px; object-fit: cover;" />
+                                    <div>
+                                        <div class="fw-bold text-dark mb-0">@item.Titulo</div>
+                                        <small class="text-muted d-block text-truncate" style="max-width: 250px;">@item.Descripcion</small>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="badge badge-quito-plomo py-1 px-2">
+                                    <i class="bi bi-geo-alt-fill me-1"></i>@item.Lugar
+                                </span>
+                            </td>
+                            <td>
+                                <div class="small fw-semibold"><i class="bi bi-calendar-event text-primary me-1"></i>@item.Fecha.ToString("dd/MM/yyyy")</div>
+                                <div class="small text-muted"><i class="bi bi-clock me-1"></i>@item.Hora</div>
+                            </td>
+                            <td>
+                                @if (item.Categoria == "Fiestas de Quito")
+                                {
+                                    <span class="badge badge-quito-red py-1 px-2">🎉 @item.Categoria</span>
+                                }
+                                else
+                                {
+                                    <span class="badge badge-quito-blue py-1 px-2">@item.Categoria</span>
+                                }
+                            </td>
+                            <td>
+                                @if (item.Precio == 0)
+                                {
+                                    <span class="badge bg-success py-1 px-2"><i class="bi bi-tag-fill me-1"></i>Gratuito</span>
+                                }
+                                else
+                                {
+                                    <span class="fw-bold text-dark">$@item.Precio.ToString("0.02")</span>
+                                }
+                            </td>
+                            <td class="text-end px-4">
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-primary" title="Ver Detalles">
+                                        <i class="bi bi-eye-fill"></i> Ver
+                                    </a>
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-warning text-dark" title="Editar Evento">
+                                        <i class="bi bi-pencil-square"></i> Editar
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger" title="Eliminar Evento">
+                                        <i class="bi bi-trash-fill"></i> Eliminar
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

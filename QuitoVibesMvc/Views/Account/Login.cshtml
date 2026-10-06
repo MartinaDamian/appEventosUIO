@@ -1,0 +1,93 @@
+@model QuitoVibesMvc.Models.ViewModels.LoginViewModel
+
+@{
+    ViewData["Title"] = "Iniciar Sesión - Acceso Protegido";
+}
+
+<div class="row justify-content-center my-4">
+    <div class="col-md-6 col-lg-5">
+        <div class="card card-quito card-login shadow-lg">
+            <div class="card-header card-quito-header text-center py-3">
+                <i class="bi bi-shield-lock-fill fs-2 d-block mb-1 text-warning"></i>
+                <h4 class="mb-0 text-white fw-bold">ALCALDÍA DE QUITO</h4>
+                <small class="text-light opacity-75">Sistema de Autenticación Unificado</small>
+            </div>
+            <div class="card-body p-4">
+                
+                @if (ViewData["ReturnUrl"] != null)
+                {
+                    <div class="alert alert-warning small py-2 shadow-sm mb-3">
+                        <i class="bi bi-exclamation-triangle-fill me-1"></i>
+                        Debes iniciar sesión para acceder a la URL protegida: <br />
+                        <code class="text-dark fw-bold">@ViewData["ReturnUrl"]</code>
+                    </div>
+                }
+
+                <form asp-action="Login" method="post">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger small py-2 mb-3" role="alert"></div>
+
+                    <input type="hidden" asp-for="ReturnUrl" />
+
+                    <div class="mb-3">
+                        <label asp-for="Username" class="form-label fw-semibold text-secondary">
+                            <i class="bi bi-person-fill text-primary me-1"></i> Usuario o Correo
+                        </label>
+                        <input asp-for="Username" class="form-control form-control-quito" placeholder="Ej: admin" autofocus />
+                        <span asp-validation-for="Username" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Password" class="form-label fw-semibold text-secondary">
+                            <i class="bi bi-key-fill text-danger me-1"></i> Contraseña
+                        </label>
+                        <input asp-for="Password" class="form-control form-control-quito" placeholder="••••••••" />
+                        <span asp-validation-for="Password" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" asp-for="RememberMe" class="form-check-input" id="rememberCheck" />
+                        <label class="form-check-label small text-secondary" for="rememberCheck">
+                            Recordar mis datos en este equipo
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-quito-danger w-100 py-2 fs-6 shadow-sm mb-3">
+                        <i class="bi bi-box-arrow-in-right me-1"></i> Ingresar al Sistema
+                    </button>
+                </form>
+
+                <!-- Cuadro Demostrativo de Credenciales para la Evaluación -->
+                <div class="border rounded p-3 bg-light mt-3">
+                    <h6 class="fw-bold text-dark mb-2" style="font-size: 0.85rem;">
+                        <i class="bi bi-info-circle-fill text-primary me-1"></i> Credenciales de Prueba para Evaluación:
+                    </h6>
+                    <div class="row g-2 text-center" style="font-size: 0.8rem;">
+                        <div class="col-6">
+                            <div class="p-2 border rounded bg-white">
+                                <strong>Admin:</strong> <code>admin</code><br />
+                                <strong>Pass:</strong> <code>admin123</code>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="p-2 border rounded bg-white">
+                                <strong>Usuario:</strong> <code>usuario</code><br />
+                                <strong>Pass:</strong> <code>quito123</code>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-2 text-muted" style="font-size: 0.75rem;">
+                        <i class="bi bi-lock-fill text-success"></i> Las contraseñas están almacenadas en la base de datos mediante encriptación <strong>MD5 / SHA-256</strong>.
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-footer bg-light text-center py-2 text-muted small">
+                <i class="bi bi-building me-1"></i> Municipio del Distrito Metropolitano de Quito
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

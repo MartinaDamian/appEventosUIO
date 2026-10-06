@@ -1,0 +1,82 @@
+@model QuitoVibesMvc.Models.EventoCultural
+
+@{
+    ViewData["Title"] = "Detalle del Evento - " + Model.Titulo;
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-9 col-lg-8">
+        <div class="card card-quito shadow-lg overflow-hidden">
+            <div class="position-relative">
+                <img src="@Model.ImagenUrl" alt="@Model.Titulo" class="w-100" style="max-height: 320px; object-fit: cover;" />
+                <div class="position-absolute top-0 end-0 m-3">
+                    <span class="badge badge-quito-red fs-6 shadow">@Model.Categoria</span>
+                </div>
+            </div>
+            
+            <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
+                    <div>
+                        <h2 class="fw-bold text-dark mb-1">@Model.Titulo</h2>
+                        <span class="text-muted"><i class="bi bi-building me-1"></i>Organizado por: <strong>@Model.Organizador</strong></span>
+                    </div>
+                    <div>
+                        @if (Model.Precio == 0)
+                        {
+                            <span class="badge bg-success fs-5 py-2 px-3"><i class="bi bi-tag-fill me-1"></i>Entrada Gratuita</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-dark fs-5 py-2 px-3">$@Model.Precio.ToString("0.02") USD</span>
+                        }
+                    </div>
+                </div>
+
+                <hr />
+
+                <div class="row g-3 mb-4">
+                    <div class="col-md-6">
+                        <div class="p-3 bg-light rounded border">
+                            <h6 class="text-secondary fw-bold mb-2"><i class="bi bi-geo-alt-fill text-danger me-2"></i>Ubicación y Sector</h6>
+                            <p class="mb-1 fw-semibold text-dark">@Model.Lugar</p>
+                            <small class="text-muted">@Model.Direccion</small>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="p-3 bg-light rounded border">
+                            <h6 class="text-secondary fw-bold mb-2"><i class="bi bi-clock-fill text-primary me-2"></i>Fecha y Hora</h6>
+                            <p class="mb-1 fw-semibold text-dark">@Model.Fecha.ToString("dddd, dd MMMM yyyy")</p>
+                            <small class="text-muted">Hora de Inicio: @Model.Hora</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h5 class="fw-bold text-dark mb-2"><i class="bi bi-text-paragraph me-2 text-primary"></i>Descripción del Evento</h5>
+                    <p class="text-secondary leading-relaxed" style="white-space: pre-line;">@Model.Descripcion</p>
+                </div>
+
+                <div class="d-flex align-items-center gap-2 mb-4">
+                    <span class="badge badge-quito-plomo py-2 px-3">Vibra: @Model.Vibra</span>
+                    <span class="badge bg-info text-dark py-2 px-3">Estado: @Model.Estado</span>
+                </div>
+
+                <hr />
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <a asp-action="Index" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left me-1"></i> Volver al Listado
+                    </a>
+                    <div class="d-flex gap-2">
+                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning text-dark fw-semibold">
+                            <i class="bi bi-pencil-square me-1"></i> Editar
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger fw-semibold">
+                            <i class="bi bi-trash-fill me-1"></i> Eliminar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

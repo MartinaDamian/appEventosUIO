@@ -1,0 +1,128 @@
+@model QuitoVibesMvc.Models.EventoCultural
+
+@{
+    ViewData["Title"] = "Crear Evento Cultural";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-9 col-lg-8">
+        <div class="card card-quito shadow-md">
+            <div class="card-header card-quito-header d-flex justify-content-between align-items-center">
+                <span class="fs-5"><i class="bi bi-plus-circle-fill me-2 text-danger"></i>Registrar Nuevo Evento Cultural</span>
+                <span class="badge bg-light text-dark">Municipio de Quito</span>
+            </div>
+            <div class="card-body p-4">
+                <form asp-action="Create" method="post">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                    <div class="row g-3">
+                        <div class="col-md-12">
+                            <label asp-for="Titulo" class="form-label fw-semibold text-secondary"></label>
+                            <input asp-for="Titulo" class="form-control form-control-quito" placeholder="Ej. Serenata Quiteña en la Plaza de San Francisco" />
+                            <span asp-validation-for="Titulo" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label asp-for="Descripcion" class="form-label fw-semibold text-secondary"></label>
+                            <textarea asp-for="Descripcion" class="form-control form-control-quito" rows="3" placeholder="Descripción detallada del programa, artistas y recomendaciones..."></textarea>
+                            <span asp-validation-for="Descripcion" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label asp-for="Lugar" class="form-label fw-semibold text-secondary"></label>
+                            <select asp-for="Lugar" class="form-select form-control-quito">
+                                <option value="Centro Histórico">Centro Histórico</option>
+                                <option value="La Mariscal">La Mariscal</option>
+                                <option value="Parque La Carolina">Parque La Carolina</option>
+                                <option value="Parque El Ejido">Parque El Ejido</option>
+                                <option value="Cumbayá">Cumbayá</option>
+                                <option value="Villa Flora / Sur de Quito">Villa Flora / Sur de Quito</option>
+                                <option value="Calderón / Norte">Calderón / Norte</option>
+                            </select>
+                            <span asp-validation-for="Lugar" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label asp-for="Direccion" class="form-label fw-semibold text-secondary"></label>
+                            <input asp-for="Direccion" class="form-control form-control-quito" placeholder="Ej. Calles Benalcázar y Sucre" />
+                            <span asp-validation-for="Direccion" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label asp-for="Fecha" class="form-label fw-semibold text-secondary"></label>
+                            <input asp-for="Fecha" type="date" class="form-control form-control-quito" />
+                            <span asp-validation-for="Fecha" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label asp-for="Hora" class="form-label fw-semibold text-secondary"></label>
+                            <input asp-for="Hora" class="form-control form-control-quito" placeholder="Ej. 19:00" />
+                            <span asp-validation-for="Hora" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label asp-for="Precio" class="form-label fw-semibold text-secondary"></label>
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                <input asp-for="Precio" type="number" step="0.50" min="0" class="form-control form-control-quito" />
+                            </div>
+                            <span asp-validation-for="Precio" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label asp-for="Categoria" class="form-label fw-semibold text-secondary"></label>
+                            <select asp-for="Categoria" class="form-select form-control-quito">
+                                <option value="Fiestas de Quito">Fiestas de Quito</option>
+                                <option value="Concierto">Concierto</option>
+                                <option value="Teatro">Teatro</option>
+                                <option value="Exposición">Exposición</option>
+                                <option value="Gastronomía">Gastronomía</option>
+                                <option value="Feria Artesanal">Feria Artesanal</option>
+                            </select>
+                            <span asp-validation-for="Categoria" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label asp-for="Vibra" class="form-label fw-semibold text-secondary"></label>
+                            <select asp-for="Vibra" class="form-select form-control-quito">
+                                <option value="Tradicional">Tradicional</option>
+                                <option value="Familiar">Familiar</option>
+                                <option value="Juvenil">Juvenil</option>
+                                <option value="Nocturna">Nocturna</option>
+                                <option value="Relajada">Relajada</option>
+                            </select>
+                            <span asp-validation-for="Vibra" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label asp-for="ImagenUrl" class="form-label fw-semibold text-secondary"></label>
+                            <input asp-for="ImagenUrl" class="form-control form-control-quito" placeholder="https://..." />
+                            <span asp-validation-for="ImagenUrl" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label asp-for="Organizador" class="form-label fw-semibold text-secondary"></label>
+                            <input asp-for="Organizador" class="form-control form-control-quito" />
+                            <span asp-validation-for="Organizador" class="text-danger small"></span>
+                        </div>
+                    </div>
+
+                    <hr class="my-4" />
+
+                    <div class="d-flex justify-content-end gap-2">
+                        <a asp-action="Index" class="btn btn-outline-secondary px-4">
+                            <i class="bi bi-x-circle me-1"></i> Cancelar
+                        </a>
+                        <button type="submit" class="btn btn-quito-danger px-4">
+                            <i class="bi bi-check-circle-fill me-1"></i> Guardar Evento
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
